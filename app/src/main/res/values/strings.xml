@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Glycemic Index</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="update_info">Veri tabanınını güncellemek üzeresiniz!\nDevam etmeniz durumunda sizin eklediğiniz veriler değişmeyecek sadece servis sağlayıcıdaki değişiklikler local hafızaya alınacaktır!\nBu durum daha öncesinde servisten alınan besinler üzerinde yaptığınız değişikliklerin kaybolmasına neden olabilir!\nGüncelleme işlemine devam etmek istiyorsanız güncelle butonuna emin değilseniz iptal butonuna tıklayınız.</string>
+    <string name="on_data_fetching_info">Besin değerleri sağlayıcıdan alınıyor..\nLütfen bu aşamada uygulamayı kapatmayınız..</string>
+    <string name="save">KAYDET</string>
+    <string name="delete">SİL</string>
+
+
+</resources>
