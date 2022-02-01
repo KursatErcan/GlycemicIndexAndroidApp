@@ -3,22 +3,23 @@ package com.kursatercan.glycemicindex.db
 import android.content.Context
 import com.kursatercan.glycemicindex.model.Category
 import com.kursatercan.glycemicindex.model.Food
-import io.realm.Realm
 import io.realm.kotlin.where
 
 class DBManager (context:Context) {
-    private val db:DB = DB(context)
+    private val realm = DB(context).config()
+
+    fun getRealm() = realm
 
     fun addCategory(category: Category){
-        db.config()?.executeTransaction { it.insert(category) }
+        realm?.executeTransaction { it.insert(category) }
     }
     fun addFood(food: Food){
-        db.config()?.executeTransaction { it.insert(food) }
+        realm?.executeTransaction { it.insert(food) }
     }
 
     fun getCategories():ArrayList<Category>{
         val list = ArrayList<Category>()
-        db.config()?.executeTransaction {
+        realm?.executeTransaction {
             it.where<Category>().findAll().forEach {
                 list.add(it)
             }
@@ -27,7 +28,7 @@ class DBManager (context:Context) {
     }
     fun getFoods():ArrayList<Food>{ // bütün food'ları getirir
         val list = ArrayList<Food>()
-        db.config()?.executeTransaction {
+        realm?.executeTransaction {
             it.where<Food>().findAll().forEach {
                 list.add(it)
             }
@@ -36,17 +37,29 @@ class DBManager (context:Context) {
     }
     fun getFoods(cid:String): ArrayList<Food> { // cid kategori numarasına sahip olan food'ları getirir
         val list = ArrayList<Food>()
-        db.config()?.executeTransaction {
+        realm?.executeTransaction {
             it.where<Food>().equalTo("cid",cid).findAll().forEach {
                 list.add(it)
             }
         }
         return list
         //return db.config()?.where<Food>()!!.equalTo("cid",cid)
-
     }
+    fun getFavourites() : ArrayList<Food>{
+        val list = ArrayList<Food>()
+        realm?.executeTransaction {
+            it.where<Food>()
+                .equalTo("favouriteState",true)
+                .findAll()
+                .forEach {
+                    list.add(it)
+                }
+        }
+        return list
+    }
+
     fun getFood(name:String,glysemicIndex: Int?,carbohydrateAmount: String?,calorie: String?): Int { //
-        return db.config()?.where<Food>()!!
+        return realm?.where<Food>()!!
             .equalTo("name",name)
             .equalTo("glysemicIndex",glysemicIndex)
             .equalTo("carbohydrateAmount",carbohydrateAmount)
@@ -54,37 +67,47 @@ class DBManager (context:Context) {
             .findAll().size
     }
     fun getCategory(title:String): Int { //
-        return db.config()?.where<Category>()!!
+        return realm?.where<Category>()!!
             .equalTo("title",title)
             .findAll().size
     }
+
     fun removeCategory(cid: String){
-        val category = db.config()?.where(Category::class.java)
+        removeFoodWithCID(cid)
+        val category = realm?.where(Category::class.java)
             ?.equalTo("cid", cid)
             ?.findFirst()
 
-        db.config()?.executeTransaction {
+        realm?.executeTransaction {
             category!!.deleteFromRealm()
         }
     }
     fun removeFoodWithCID(cid: String){
-        val foods = db.config()?.where(Food::class.java)
+        val foods = realm?.where(Food::class.java)
             ?.equalTo("cid", cid)?.findAll()
 
-        db.config()?.executeTransaction {
+        realm?.executeTransaction {
             foods!!.forEach{
                 it.deleteFromRealm()
             }
         }
     }
     fun removeFoodWithFID(fid: String){
-        val foods = db.config()?.where(Food::class.java)
-            ?.equalTo("fid", fid)?.findAll()
+        val foods = realm?.where(Food::class.java)
+            ?.equalTo("fid", fid)?.findFirst()
 
-        db.config()?.executeTransaction {
-            foods!!.forEach{
-                it.deleteFromRealm()
-            }
+        realm?.executeTransaction {
+            foods!!.deleteFromRealm()
+        }
+    }
+    fun updateFood(food: Food){
+        realm?.executeTransaction {
+            it.copyToRealmOrUpdate(food)
+        }
+    }
+    fun updateCategory(category: Category){
+        realm?.executeTransaction {
+            it.copyToRealmOrUpdate(category)
         }
     }
 

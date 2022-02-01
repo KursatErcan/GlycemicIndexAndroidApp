@@ -1,28 +1,31 @@
 package com.kursatercan.glycemicindex.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kursatercan.glycemicindex.R
 import com.kursatercan.glycemicindex.databinding.ItemCategoryBinding
 import com.kursatercan.glycemicindex.db.DBManager
 import com.kursatercan.glycemicindex.model.Category
-import com.kursatercan.glycemicindex.model.Food
+import com.kursatercan.glycemicindex.model.CurrentCategory
+import com.kursatercan.glycemicindex.model.CurrentFood
+import com.kursatercan.glycemicindex.view.ModifyCategoryActivity
+import com.kursatercan.glycemicindex.view.ModifyFoodActivity
 
-class CategoryAdapter(val context: Context, val categoryList:ArrayList<Category>) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>()  {
+class CategoryAdapter(val context: Context, private val categoryList:ArrayList<Category>) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>()  {
 
     class ViewHolder(val bind : ItemCategoryBinding) : RecyclerView.ViewHolder(bind.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val bind = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(bind)
     }
 
-    override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val category = categoryList[position]
         holder.bind.apply {
             tvCategoryName.text = category.title
@@ -41,7 +44,6 @@ class CategoryAdapter(val context: Context, val categoryList:ArrayList<Category>
                 }
                 ivCategoryExpand.visibility = if(ivCategoryExpand.visibility == View.GONE) View.VISIBLE else View.GONE
             }
-
             ivCategoryExpand.setOnClickListener {
                 categoryExpandLayout.visibility = if(categoryExpandLayout.visibility == View.GONE) {
                     ivCategoryExpand.setImageDrawable(context.getDrawable(R.drawable.ic_expand_less))
@@ -53,7 +55,10 @@ class CategoryAdapter(val context: Context, val categoryList:ArrayList<Category>
             }
 
             modifyCategory.setOnClickListener {
-                // TODO : Dialog aç
+                CurrentCategory.category = category
+                val intent = Intent(context, ModifyCategoryActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
             }
         }
     }

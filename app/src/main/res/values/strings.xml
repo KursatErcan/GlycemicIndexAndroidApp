@@ -7,6 +7,7 @@
     <string name="on_data_fetching_info">Besin değerleri sağlayıcıdan alınıyor..\nLütfen bu aşamada uygulamayı kapatmayınız..</string>
     <string name="save">KAYDET</string>
     <string name="delete">SİL</string>
+    <string name="empty_tv_error_message">Bu alan boş bırakılamaz!</string>
 
 
 </resources>

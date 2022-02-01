@@ -34,7 +34,8 @@ class RefreshDbActivity : AppCompatActivity() {
             //bind.btnUpdate.isEnabled = false
             //bind.btnCancel.isEnabled = false
             bind.btnUpdate.setBackgroundColor(getColor(R.color.button_update_disable))
-            bind.tvInfoText.setText(getString(R.string.on_data_fetching_info))
+            bind.tvInfoText.setText(
+                getString(R.string.on_data_fetching_info))
 
             Repostory().updateDataFromSource(this)
 

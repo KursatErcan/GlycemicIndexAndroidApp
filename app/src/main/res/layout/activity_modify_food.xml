@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:context=".view.ModifyFoodActivity"
+    tools:ignore="ExtraText">
+    >
+
+    <ImageView
+        android:id="@+id/iv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel"
+        android:layout_gravity="end"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Besin bilgilerini değiştirmek için ilgili alana yeni değeri girip kaydet butonuna tıklayınız. Besini silmek için ise sil butonuna tıklayınız."
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:gravity="center"
+
+        />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="5"
+        android:orientation="vertical"
+        android:horizontalSpacing="12dp"
+        android:verticalSpacing="6dp"
+        android:useDefaultMargins="true"
+        android:layout_marginTop="12dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kategori başlığı"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Besin adı"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Glisemic index"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Karbonhidrat Mik.\n(100 g'daki)"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Kalori\n(100 g'daki)"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+        <RelativeLayout
+            android:background="@drawable/button_bg"
+            android:layout_marginRight="135dp"
+            >
+
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/et_foodName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/black"
+            android:padding="4dp"
+            android:layout_marginRight="135dp"
+            android:lines="1"
+            android:maxLength="120"
+            />
+
+        <EditText
+            android:id="@+id/et_glysemicIndex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/black"
+            android:padding="4dp"
+            android:layout_marginRight="135dp"
+            android:inputType="number"
+            android:maxLength="120"
+            android:lines="1"
+
+            />
+
+        <EditText
+            android:id="@+id/et_carbohydrateAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/black"
+            android:padding="4dp"
+            android:layout_marginRight="135dp"
+            android:lines="1"
+            android:maxLength="120"
+
+            />
+
+        <EditText
+            android:id="@+id/et_calorie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/black"
+            android:padding="4dp"
+            android:layout_marginRight="135dp"
+            android:lines="1"
+            android:maxLength="120"
+            />
+
+    </GridLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="12dp"
+        >
+
+        <Button
+            android:id="@+id/btn_remove"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="SİL"
+            android:backgroundTint="@color/button_cancel"
+            android:layout_marginEnd="12dp"
+            />
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="KAYDET"
+            android:backgroundTint="@color/button_update_enable"
+            android:layout_marginStart="12dp"
+
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

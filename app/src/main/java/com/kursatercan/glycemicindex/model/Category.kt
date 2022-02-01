@@ -9,3 +9,7 @@ open class Category :RealmObject(){
     var cid:String = UUID.randomUUID().toString()
     var title:String = ""
 }
+
+object CurrentCategory {
+    var category : Category? = null
+}

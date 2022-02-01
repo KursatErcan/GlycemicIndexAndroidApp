@@ -5,21 +5,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     >
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="10dp"
-        app:contentPadding="4dp">
+        app:contentPadding="4dp"
+        >
 
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+
+           >
             <TextView
                 android:id="@+id/tv_categoryTitle"
                 android:layout_width="match_parent"

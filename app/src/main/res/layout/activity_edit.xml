@@ -5,120 +5,263 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.EditActivity">
+    tools:context=".view.EditActivity"
+    >
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:id="@+id/layout"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/categoryCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <RelativeLayout
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp">
+
+            <LinearLayout
+                android:id="@+id/categoryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                >
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="Kategori Düzenle"
-                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:text="Kategori Ekle"
                     android:textColor="@color/black"
-                    />
-                <ImageView
-                    android:id="@+id/iv_categoryEditExpand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_expand_more"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:onClick="onCategoryEditExpandClicked"
-                    />
-            </RelativeLayout>
-            <LinearLayout
-                android:id="@+id/categoryEditLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                    android:textSize="25sp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="8dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="sil"
-                        android:textColor="@color/black"/>
-                    <Switch
-                        android:id="@+id/switch_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:onClick="onCategoryEditSwitchClicked"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ekle"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    >
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="12dp"
                         android:text="Title : "
                         android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:layout_marginEnd="12dp"
-                        />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/et_categoryTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/button_bg"
                         android:hint="Category Name"
-                        android:textSize="12sp"
-                        />
-                    <Spinner
-                        android:id="@+id/spinner_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"/>
+                        android:lines="1"
+                        android:maxLength="120"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
+
                 <Button
-                    android:id="@+id/btn_categoryButton"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/btn_categorySaveButton"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:onClick="onCategoryButtonClicked"
-                    android:text="@string/save"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/button_update_enable"
+                    android:onClick="onCategorySaveButtonClicked"
+                    android:text="@string/save" />
+
             </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/foodCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Besin Ekle"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:columnCount="2"
+                    android:horizontalSpacing="12dp"
+                    android:orientation="vertical"
+                    android:rowCount="5"
+                    android:useDefaultMargins="true"
+                    android:verticalSpacing="6dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Kategori başlığı"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Besin adı"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Glisemic index"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Karbonhidrat Mik.\n(100 g'daki)"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="center_vertical"
+                        android:text="Kalori\n(100 g'daki)"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+                    <RelativeLayout
+                        android:layout_marginRight="135dp"
+                        android:background="@drawable/button_bg">
+
+                        <Spinner
+                            android:id="@+id/spinner_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            />
+
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/et_foodName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="135dp"
+                        android:background="@drawable/button_bg"
+                        android:lines="1"
+                        android:maxLength="120"
+                        android:padding="4dp"
+                        android:textColor="@color/black"
+
+                        />
+
+                    <EditText
+                        android:id="@+id/et_glysemicIndex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="135dp"
+                        android:background="@drawable/button_bg"
+                        android:inputType="number"
+                        android:lines="2"
+                        android:maxLength="120"
+                        android:padding="4dp"
+                        android:textColor="@color/black"
+
+                        />
+
+                    <EditText
+                        android:id="@+id/et_carbohydrateAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="135dp"
+                        android:background="@drawable/button_bg"
+                        android:lines="1"
+                        android:maxLength="120"
+                        android:padding="4dp"
+                        android:textColor="@color/black"
+
+                        />
+
+                    <EditText
+                        android:id="@+id/et_calorie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="135dp"
+                        android:background="@drawable/button_bg"
+                        android:lines="1"
+                        android:maxLength="120"
+                        android:padding="4dp"
+                        android:textColor="@color/black"
+
+                        />
+
+                </GridLayout>
+
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/button_update_enable"
+                    android:onClick="onFoodSaveButtonClicked"
+                    android:text="Kaydet"
+
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
 </RelativeLayout>

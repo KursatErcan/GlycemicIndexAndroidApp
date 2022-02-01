@@ -13,12 +13,12 @@ import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
 class Repostory {
-    private lateinit var db: DBManager
+    //private lateinit var db: DBManager
     private val url: String =
         "http://kolaydoktor.com/saglik-icin-yasam/diyet-ve-beslenme/besinlerin-glisemik-indeks-tablosu/0503/1"
 
     fun getDataFromSource(context: Context) {
-        db = DBManager(context)
+        //db = DBManager(context)
 
         val thread = Thread {
             try {
@@ -40,7 +40,8 @@ class Repostory {
 
                             val category = Category()
                             category.title = title
-                            db.addCategory(category)
+                            DBManager(context).addCategory(category)
+                            Log.d("burdasın : ", "getDataFromSource: ")
                             cid = category.cid
                         } else if (index == 1) {
                             Log.d(
@@ -53,13 +54,13 @@ class Repostory {
                             food.cid = cid
                             food.name = elements[0].text()
                             food.glysemicIndex = elements[1].text().trim().toInt()
-                            food.carbohydrateAmount = elements[2].text().toString()
-                            food.calorie = elements[3].text().toString()
+                            food.carbohydrateAmount = elements[2].text().replace(',','.')
+                            food.calorie = elements[3].text().trim()
 
+                            DBManager(context).addFood(food)
 
-                            db.addFood(food)
-
-                            Log.d("Item : (${row.select("p").size})  -- ", row.select("p").text())
+                            //Log.d("Item : (${row.select("p").size})  -- ", row.select("p").text())
+                            Log.d("Item : (${row.select("p").size})  -- ", food.name+" "+food.glysemicIndex + " " + food.carbohydrateAmount + " "+ food.calorie)
 
                         }
 
@@ -75,7 +76,7 @@ class Repostory {
 
     fun updateDataFromSource(context: Context) {
         Log.d("updateDataFromSource", "updateDataFromSource: burdasın")
-        db = DBManager(context)
+        //db = DBManager(context)
         val thread = Thread {
             try {
                 val doc: Document = Jsoup.connect(url).get()
@@ -89,13 +90,13 @@ class Repostory {
                         if (index == 0) {
                             val title = row.select("p").text()
 
-                            if (title.trim().isEmpty() ||  db.getCategory(title) == 1) {
+                            if (title.trim().isEmpty() ||  DBManager(context).getCategory(title) == 1) {
                                 Log.d("Added New Category : ", title)
                                 continue
                             }else{
                                 val category = Category()
                                 category.title = title
-                                db.addCategory(category)
+                                DBManager(context).addCategory(category)
                                 cid = category.cid
                             }
 
@@ -111,13 +112,13 @@ class Repostory {
                             food.cid = cid
                             food.name = elements[0].text()
                             food.glysemicIndex = elements[1].text().trim().toInt()
-                            food.carbohydrateAmount = elements[2].text().toString()
-                            food.calorie = elements[3].text().toString()
+                            food.carbohydrateAmount = elements[2].text().replace(',','.')
+                            food.calorie = elements[3].text().trim()
 
-                            if(db.getFood(food.name,food.glysemicIndex,food.carbohydrateAmount,food.calorie)==1){
-                               continue
+                            if(DBManager(context).getFood(food.name,food.glysemicIndex,food.carbohydrateAmount,food.calorie)==1){
+                                continue
                             }else{
-                                db.addFood(food)
+                                DBManager(context).addFood(food)
                             }
 
 

@@ -3,13 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavouritesFragment">
+    tools:context="view.fragment.FavouritesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_foods"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="FAVOURITES"
-        android:gravity="center"/>
+        android:layout_margin="12dp"
+        android:visibility="visible" />
+
+    <!-- TODO : güzel bi görselle değiştirilebilir -->
+    <TextView
+        android:id="@+id/tv_favouriteInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Henüz favori besinleriniz yok!"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

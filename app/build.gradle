@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
+
 }
 
 android {
@@ -34,6 +36,7 @@ android {
     buildFeatures{
         viewBinding true
     }
+
 }
 import io.realm.transformer.RealmTransformer
 android.registerTransform(new RealmTransformer(project))

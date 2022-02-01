@@ -21,9 +21,9 @@ class CategoriesFragment : Fragment() {
 
     private lateinit var adapter: CategoryAdapter
     private lateinit var categoryList :ArrayList<Category>
-
+    private lateinit var mContext: Context
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        mContext = requireActivity().baseContext
         super.onCreate(savedInstanceState)
     }
 
@@ -32,13 +32,9 @@ class CategoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         bind = FragmentCategoriesBinding.inflate(inflater,container,false)
-        // Inflate the layout for this fragment
-        /*bind?.cardView?.setOnClickListener {
-           //TransitionManager.beginDelayedTransition(bind?.layout, AutoTransition())
-            bind?.rv_meals?.visibility = if(bind?.rv_meals?.visibility == View.GONE) View.VISIBLE else View.GONE
-        }*/
-        categoryList = DBManager(requireActivity().baseContext).getCategories()
-        adapter = CategoryAdapter(requireActivity().baseContext,categoryList)
+
+        categoryList = DBManager(mContext).getCategories()
+        adapter = CategoryAdapter(mContext,categoryList)
 
         bind?.rvCategories?.layoutManager = LinearLayoutManager(activity,
             LinearLayoutManager.VERTICAL,false)
@@ -46,7 +42,5 @@ class CategoriesFragment : Fragment() {
 
         return binding.root
     }
-
-
 
 }
