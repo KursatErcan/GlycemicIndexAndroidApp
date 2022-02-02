@@ -66,6 +66,11 @@ class DBManager (context:Context) {
             .equalTo("calorie",calorie)
             .findAll().size
     }
+    fun getCategoryObj(title:String): Category { //
+        return realm?.where<Category>()!!
+            .equalTo("title",title)
+            .findFirst() as Category
+    }
     fun getCategory(title:String): Int { //
         return realm?.where<Category>()!!
             .equalTo("title",title)
@@ -82,7 +87,7 @@ class DBManager (context:Context) {
             category!!.deleteFromRealm()
         }
     }
-    fun removeFoodWithCID(cid: String){
+    private fun removeFoodWithCID(cid: String){
         val foods = realm?.where(Food::class.java)
             ?.equalTo("cid", cid)?.findAll()
 
@@ -110,6 +115,7 @@ class DBManager (context:Context) {
             it.copyToRealmOrUpdate(category)
         }
     }
+
 
     /*
 

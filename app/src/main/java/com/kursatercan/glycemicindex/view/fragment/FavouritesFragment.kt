@@ -2,21 +2,20 @@ package com.kursatercan.glycemicindex.view.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kursatercan.glycemicindex.adapter.CategoryAdapter
+import com.kursatercan.glycemicindex.RealmDBActionListener
+import com.kursatercan.glycemicindex.RealmDBActionListenerReferences
 import com.kursatercan.glycemicindex.adapter.FoodAdapter
-import com.kursatercan.glycemicindex.databinding.FragmentCategoriesBinding
 import com.kursatercan.glycemicindex.databinding.FragmentFavouritesBinding
 import com.kursatercan.glycemicindex.db.DBManager
-import com.kursatercan.glycemicindex.model.Category
 import com.kursatercan.glycemicindex.model.Food
 
 
-class FavouritesFragment : Fragment() {
+class FavouritesFragment : Fragment(), RealmDBActionListener {
     private var bind : FragmentFavouritesBinding? = null
     private val binding get() = bind!!
 
@@ -27,6 +26,7 @@ class FavouritesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireActivity().baseContext
+        RealmDBActionListenerReferences.favouritesFragmentListener=this
 
     }
 
@@ -52,6 +52,14 @@ class FavouritesFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    override fun onFavouriesChanged() {
+        favouriteFoodsList = DBManager(mContext).getFavourites()
+        adapter.notifyDataSetChanged()
+
+        //super.onFavouriesChanged()
+        //Log.d("ON ADDED CATEGORY", "FAVOURİTES FRAGMENT ")
     }
 
 }

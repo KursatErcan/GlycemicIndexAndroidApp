@@ -20,9 +20,8 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
-        app:itemBackground="@color/design_default_color_primary"
+        app:itemBackground="@color/themeColor"
         app:itemIconTint="#fff"
         app:itemTextColor="@android:color/white"
-        app:menu="@menu/bottom_menu"/>
-        />
+        app:menu="@menu/bottom_menu" />
 </RelativeLayout>

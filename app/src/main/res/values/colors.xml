@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="themeColor">#105E33</color>
     <color name="button_update_enable">#9F1515</color>
     <color name="button_update_disable">#AA6060</color>
     <color name="button_cancel">#9A9568</color>

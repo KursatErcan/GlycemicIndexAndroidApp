@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.kursatercan.glycemicindex.databinding.ItemSpinnerCategoryBinding
 import com.kursatercan.glycemicindex.model.Category
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CategorySpinnerAdapter (private val categoryList:ArrayList<Category>, val context: Context) :
     BaseAdapter() {

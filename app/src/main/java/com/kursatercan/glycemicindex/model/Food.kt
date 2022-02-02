@@ -9,8 +9,8 @@ open class Food : RealmObject(){
     var fid:String = UUID.randomUUID().toString()
     var cid: String =""
     var name: String =""
-    var glysemicIndex: Int = 0  // TODO  ::>  0-54 : 55-69 : 70-
-    var carbohydrateAmount: String = "" //TODO float yap
+    var glysemicIndex: Int = 0  //  0-54 : 55-69 : 70-
+    var carbohydrateAmount: String = ""
     var calorie: String = ""
     var favouriteState: Boolean = false
 

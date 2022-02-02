@@ -5,15 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.kursatercan.glycemicindex.R
-import com.kursatercan.glycemicindex.Repostory
-import com.kursatercan.glycemicindex.adapter.CategoryAdapter
 import com.kursatercan.glycemicindex.databinding.ActivityMainBinding
-import com.kursatercan.glycemicindex.db.DBManager
-import com.kursatercan.glycemicindex.model.Category
 import com.kursatercan.glycemicindex.view.fragment.CategoriesFragment
 import com.kursatercan.glycemicindex.view.fragment.FavouritesFragment
 import com.kursatercan.glycemicindex.view.fragment.SearchFragment
@@ -26,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_main))
 
         //Repostory().getDataFromSource(this)
 
@@ -47,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun changeFragment(fragment: Fragment){
+    private fun changeFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(bind.frameLayout.id,fragment)
         transaction.commit()
@@ -61,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.refreshDB -> startActivity(Intent(this@MainActivity,RefreshDbActivity::class.java))
-            R.id.addFood -> startActivity(Intent(this@MainActivity,EditActivity::class.java))
+            R.id.newItem -> startActivity(Intent(this@MainActivity,EditActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

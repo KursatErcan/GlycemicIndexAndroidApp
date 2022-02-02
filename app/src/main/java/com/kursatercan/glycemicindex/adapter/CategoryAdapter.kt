@@ -12,9 +12,7 @@ import com.kursatercan.glycemicindex.databinding.ItemCategoryBinding
 import com.kursatercan.glycemicindex.db.DBManager
 import com.kursatercan.glycemicindex.model.Category
 import com.kursatercan.glycemicindex.model.CurrentCategory
-import com.kursatercan.glycemicindex.model.CurrentFood
 import com.kursatercan.glycemicindex.view.ModifyCategoryActivity
-import com.kursatercan.glycemicindex.view.ModifyFoodActivity
 
 class CategoryAdapter(val context: Context, private val categoryList:ArrayList<Category>) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>()  {
 
@@ -57,11 +55,15 @@ class CategoryAdapter(val context: Context, private val categoryList:ArrayList<C
             modifyCategory.setOnClickListener {
                 CurrentCategory.category = category
                 val intent = Intent(context, ModifyCategoryActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                intent.putExtra("position",position)
+
                 context.startActivity(intent)
             }
         }
     }
 
     override fun getItemCount(): Int = categoryList.size
+
+
 }

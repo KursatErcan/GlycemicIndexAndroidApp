@@ -7,13 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".view.SplashActivity">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Splash"
-        android:textSize="24dp"
-        android:textColor="@color/black"
+        android:src="@drawable/ic_gl"
+        android:layout_margin="32dp"
 
         />
     <TextView

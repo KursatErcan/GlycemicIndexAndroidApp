@@ -1,13 +1,10 @@
 package com.kursatercan.glycemicindex
 
 import android.content.Context
-import android.content.Intent
-import android.os.Handler
 import android.util.Log
 import com.kursatercan.glycemicindex.db.DBManager
 import com.kursatercan.glycemicindex.model.Category
 import com.kursatercan.glycemicindex.model.Food
-import com.kursatercan.glycemicindex.view.MainActivity
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
@@ -33,7 +30,6 @@ class Repostory {
                     for ((index, row) in rows.withIndex()) {
                         if (index == 0) {
                             val title = row.select("p").text()
-                            // TODO : buradan emin değilim patlarsa burda patlar -- nereye döneceğini belirtmek için bi key vardı ona bak!
                             if (title.trim().isEmpty()) continue
 
                             Log.d("Category : ", title)
@@ -91,6 +87,7 @@ class Repostory {
                             val title = row.select("p").text()
 
                             if (title.trim().isEmpty() ||  DBManager(context).getCategory(title) == 1) {
+                                cid = DBManager(context).getCategoryObj(title).cid
                                 Log.d("Added New Category : ", title)
                                 continue
                             }else{

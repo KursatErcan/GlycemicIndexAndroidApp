@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.kursatercan.glycemicindex.R
+import com.kursatercan.glycemicindex.RealmDBActionListenerReferences
 import com.kursatercan.glycemicindex.adapter.CategorySpinnerAdapter
 import com.kursatercan.glycemicindex.databinding.ActivityEditBinding
 import com.kursatercan.glycemicindex.db.DBManager
@@ -24,7 +25,8 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityEditBinding.inflate(layoutInflater)
         setContentView(bind.root)
-
+        supportActionBar?.title = "Yeni Ekle"
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_main))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
@@ -37,8 +39,6 @@ class EditActivity : AppCompatActivity() {
 
     }
     private fun createCategory(){
-        // TODO recyclerı güncelle
-
         val category = Category()
         category.title = bind.etCategoryTitle.text.toString()
         db.addCategory(category)
@@ -47,6 +47,7 @@ class EditActivity : AppCompatActivity() {
         categoryList.add(category)
         categorySpinnerAdapter.notifyDataSetChanged()
         Toast.makeText(this, "Yeni kategori oluşturuldu.", Toast.LENGTH_SHORT).show()
+        RealmDBActionListenerReferences.categoryFragmentListener?.onAddedCategory(category)
 
     }
 
@@ -67,6 +68,8 @@ class EditActivity : AppCompatActivity() {
         bind.etCarbohydrateAmount.setText("")
         bind.etCalorie.setText("")
         Toast.makeText(this, "Yeni besin eklendi.", Toast.LENGTH_SHORT).show()
+
+        RealmDBActionListenerReferences.foodAdapterListener?.onAddedFood(food)
 
     }
 
@@ -103,9 +106,9 @@ class EditActivity : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Yeni Kategori Ekle")
         alertDialogBuilder.setMessage("Yeni kategori oluşturmak istiyor musunuz?")
-        alertDialogBuilder.setPositiveButton("İptal") { dialogInterface: DialogInterface, i: Int ->
+        alertDialogBuilder.setPositiveButton("İptal") { _: DialogInterface, _: Int ->
         }
-        alertDialogBuilder.setNegativeButton("Oluştur") { dialogInterface: DialogInterface, i: Int ->
+        alertDialogBuilder.setNegativeButton("Oluştur") { _: DialogInterface, _: Int ->
             createCategory()
         }
 
@@ -116,9 +119,9 @@ class EditActivity : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Yeni Besin Ekle")
         alertDialogBuilder.setMessage("Yeni besin oluşturmak istiyor musunuz?")
-        alertDialogBuilder.setPositiveButton("İptal") { dialogInterface: DialogInterface, i: Int ->
+        alertDialogBuilder.setPositiveButton("İptal") { _: DialogInterface, _: Int ->
         }
-        alertDialogBuilder.setNegativeButton("Oluştur") { dialogInterface: DialogInterface, i: Int ->
+        alertDialogBuilder.setNegativeButton("Oluştur") { _: DialogInterface, _: Int ->
             createFood()
         }
 

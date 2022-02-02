@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.kursatercan.glycemicindex.R
+import com.kursatercan.glycemicindex.RealmDBActionListenerReferences
 import com.kursatercan.glycemicindex.databinding.ActivityModifyCategoryBinding
 import com.kursatercan.glycemicindex.db.DBManager
 import com.kursatercan.glycemicindex.model.Category
@@ -14,14 +16,17 @@ import com.kursatercan.glycemicindex.model.CurrentCategory
 class ModifyCategoryActivity : AppCompatActivity() {
     private lateinit var bind : ActivityModifyCategoryBinding
     private val category : Category = CurrentCategory.category!!
+    private var itemPosition : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityModifyCategoryBinding.inflate(layoutInflater)
         setContentView(bind.root)
-
+        supportActionBar?.title = "Kategori Düzenle"
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_main))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
+        itemPosition = intent.getIntExtra("position",0)
 
         bind.apply {
             etCategoryTitle.setText(category.title)
@@ -42,17 +47,17 @@ class ModifyCategoryActivity : AppCompatActivity() {
     }
 
     private fun updateCategory(){
-        // TODO recyclerı güncelle
-
         DBManager(this).getRealm()?.executeTransaction {
             category.title = bind.etCategoryTitle.text.toString()
         }
         Toast.makeText(this, "Değişiklikler kaydedildi.", Toast.LENGTH_SHORT).show()
+        RealmDBActionListenerReferences.categoryFragmentListener?.onModifiedCategory(category)
 
     }
 
     private fun removeCategory(){
         DBManager(this).removeCategory(category.cid)
+        RealmDBActionListenerReferences.categoryFragmentListener?.onModifiedCategory(category)
         Toast.makeText(this, "Kategori başarıyla silindi.", Toast.LENGTH_SHORT).show()
         finish()
     }
@@ -61,9 +66,9 @@ class ModifyCategoryActivity : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Kategori Bilgilerini Güncelle")
         alertDialogBuilder.setMessage("Kategori başlığını değiştirmek istiyor musunuz?")
-        alertDialogBuilder.setPositiveButton("İptal") { dialogInterface: DialogInterface, i: Int ->
+        alertDialogBuilder.setPositiveButton("İptal") { _: DialogInterface, _: Int ->
         }
-        alertDialogBuilder.setNegativeButton("Değiştir") { dialogInterface: DialogInterface, i: Int ->
+        alertDialogBuilder.setNegativeButton("Değiştir") { _: DialogInterface, _: Int ->
             updateCategory()
         }
 
@@ -75,8 +80,8 @@ class ModifyCategoryActivity : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Besin Sil")
         alertDialogBuilder.setMessage("$ctitle kategorisini silmek istediğinden emin misin? Aynı zamanda kategori altındaki bütün besinlerde silinecektir.")
-        alertDialogBuilder.setPositiveButton("İptal") { dialogInterface: DialogInterface, i: Int -> }
-        alertDialogBuilder.setNegativeButton("Sil") { dialogInterface: DialogInterface, i: Int ->
+        alertDialogBuilder.setPositiveButton("İptal") { _: DialogInterface, _: Int -> }
+        alertDialogBuilder.setNegativeButton("Sil") { _: DialogInterface, _: Int ->
             removeCategory()
         }
 

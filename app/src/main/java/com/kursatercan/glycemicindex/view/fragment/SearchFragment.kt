@@ -1,11 +1,10 @@
 package com.kursatercan.glycemicindex.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kursatercan.glycemicindex.databinding.FragmentCategoriesBinding
+import androidx.fragment.app.Fragment
 import com.kursatercan.glycemicindex.databinding.FragmentSearchBinding
 
 

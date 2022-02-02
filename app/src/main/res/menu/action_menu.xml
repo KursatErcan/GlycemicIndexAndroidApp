@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Besin Ekle"
-        android:id="@+id/addFood"/>
+        android:title="Ekle"
+        android:id="@+id/newItem"/>
     <item
         android:title="Veritabanını güncelle"
         android:id="@+id/refreshDB"/>
