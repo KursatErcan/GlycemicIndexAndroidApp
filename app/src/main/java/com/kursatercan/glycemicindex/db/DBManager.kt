@@ -57,7 +57,12 @@ class DBManager (context:Context) {
         }
         return list
     }
-
+    fun getFood(fid: String): Food { //
+        return realm?.where<Food>()!!
+            .equalTo("fid",fid)
+            .findFirst() as Food
+    }
+    //category check
     fun getFood(name:String,glysemicIndex: Int?,carbohydrateAmount: String?,calorie: String?): Int { //
         return realm?.where<Food>()!!
             .equalTo("name",name)
@@ -71,6 +76,12 @@ class DBManager (context:Context) {
             .equalTo("title",title)
             .findFirst() as Category
     }
+    fun getCategoryObjWithCID(cid:String): Category { //
+        return realm?.where<Category>()!!
+            .equalTo("cid",cid)
+            .findFirst() as Category
+    }
+    // category check
     fun getCategory(title:String): Int { //
         return realm?.where<Category>()!!
             .equalTo("title",title)
@@ -105,54 +116,4 @@ class DBManager (context:Context) {
             foods!!.deleteFromRealm()
         }
     }
-    fun updateFood(food: Food){
-        realm?.executeTransaction {
-            it.copyToRealmOrUpdate(food)
-        }
-    }
-    fun updateCategory(category: Category){
-        realm?.executeTransaction {
-            it.copyToRealmOrUpdate(category)
-        }
-    }
-
-
-    /*
-
-    fun getNote(uid:String): Note? {
-        return db.config()?.where<Note>()!!.equalTo("uid",uid).findFirst()
-
-    }
-
-     */
-    /*
-    //title: String,noteText: String
-    fun updateNote(note: Note){
-        db.config()?.executeTransaction {
-            /*val note = Note()
-            note.uid = noteData.uid
-            note.title = noteData.title
-            note.noteText = noteData.noteText
-            */
-            it.insertOrUpdate(note)
-        }
-    }
-    fun removeNote(uid: String){
-        val note = db.config()?.where(Note::class.java)
-            ?.equalTo("uid", uid)
-            ?.findFirst()
-
-        db.config()?.executeTransaction {
-            note!!.deleteFromRealm()
-        }
-    }
-
-    fun removeAllNotes() {
-        db.config()?.executeTransaction(Realm.Transaction {
-                realm ->
-            realm.deleteAll();
-            realm.delete(Note::class.java) })
-
-    }
-    */
 }

@@ -15,15 +15,11 @@ import com.kursatercan.glycemicindex.view.fragment.SearchFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var bind:ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_main))
-
-        //Repostory().getDataFromSource(this)
-
 
         val categoriesFragment = CategoriesFragment()
         val searchFragment = SearchFragment()

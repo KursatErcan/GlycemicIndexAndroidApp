@@ -7,32 +7,40 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    tools:context=".view.ModifyCategoryActivity"
     tools:ignore="ExtraText"
     android:layout_gravity="center">
     >
 
-    <ImageView
-        android:id="@+id/iv_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_cancel"
-        android:layout_gravity="end"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_cancel"
+            android:visibility="visible"
+            android:background="?attr/selectableItemBackground"
+            />
+
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/modify_category_text1"
+        android:text="Kategori adını değiştirmek için aşağıda verilen alana yeni değeri girip kaydet butonuna tıklayınız. Kategoriyi silmek için ise sil butonuna tıklayınız."
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:gravity="center" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/modify_category_text2"
+        android:text="İşlem sırasında kategoriye ait bütün besinler silinecektir!"
         android:textColor="#FF0000"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:gravity="center" />
 
     <LinearLayout
@@ -67,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:layout_marginBottom="32dp"
         android:layout_marginTop="12dp" >
@@ -87,5 +96,6 @@
             android:layout_marginStart="12dp" />
 
     </LinearLayout>
+
 
 </LinearLayout>

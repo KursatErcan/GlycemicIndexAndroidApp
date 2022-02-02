@@ -8,6 +8,9 @@
     <string name="save">KAYDET</string>
     <string name="delete">SİL</string>
     <string name="empty_tv_error_message">Bu alan boş bırakılamaz!</string>
+    <string name="modify_category_text1">Kategori adını değiştirmek için aşağıda verilen alana yeni değeri girip kaydet butonuna tıklayınız. Kategoriyi silmek için ise sil butonuna tıklayınız.</string>
+    <string name="modify_category_text2">İşlem sırasında kategoriye ait bütün besinler silinecektir!</string>
+    <string name="modify_food_text">Besin bilgilerini değiştirmek için ilgili alana yeni değeri girip kaydet butonuna tıklayınız. Besini silmek için ise sil butonuna tıklayınız.</string>
 
 
 </resources>
