@@ -2,14 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".SearchFragment">
+android:layout_height="match_parent" android:padding="16dp"
+tools:context="view.fragment.SearchFragment">
 
-<!-- TODO: Update blank fragment layout -->
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="SEARCH"
-    android:gravity="center"/>
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="?attr/selectableItemBackground"
+        android:closeIcon="@drawable/ic_close"
+        android:layout_alignParentTop="true"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search Here"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_foods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchView"
+        android:layout_marginTop="16dp"
+
+        />
+
 
 </RelativeLayout>
