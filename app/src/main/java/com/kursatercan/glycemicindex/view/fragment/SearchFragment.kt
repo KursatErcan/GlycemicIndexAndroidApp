@@ -31,8 +31,8 @@ class SearchFragment : Fragment() {
         mContext = requireActivity().baseContext
         db= DBManager(mContext)
         foodList = db.getFoods()
-
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +47,13 @@ class SearchFragment : Fragment() {
             rvFoods.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             rvFoods.adapter = adapter
+
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String?): Boolean {
                     searchView.clearFocus()
                     if(p0?.trim()?.isEmpty() == true){
+                        tempFoodList.clear()
+                        tempFoodList.addAll(foodList)
                         return false
                     }
                     else{
@@ -65,6 +68,8 @@ class SearchFragment : Fragment() {
 
                 override fun onQueryTextChange(p0: String?): Boolean {
                     if(p0?.trim()?.isEmpty() == true){
+                        tempFoodList.clear()
+                        tempFoodList.addAll(foodList)
                         return false
                     }
                     else{

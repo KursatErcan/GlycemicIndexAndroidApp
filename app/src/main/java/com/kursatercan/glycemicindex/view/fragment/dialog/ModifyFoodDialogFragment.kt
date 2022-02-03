@@ -99,15 +99,14 @@ class ModifyFoodDialogFragment : DialogFragment() {
         }
         return binding.root
     }
-
+    /*
     override fun onStart() {
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
         //dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-
     }
-
+     */
 
     private fun categoryFind(cid: String, categoryList: ArrayList<Category>): Int {
         for ((index, category) in categoryList.withIndex()) {
@@ -115,8 +114,6 @@ class ModifyFoodDialogFragment : DialogFragment() {
         }
         return 0
     }
-
-//ListenerRef.modifyCategoryDialogListener?.onUpdateCategory(category,position!!)
 
 }
 

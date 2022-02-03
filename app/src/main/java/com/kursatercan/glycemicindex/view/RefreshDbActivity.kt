@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kursatercan.glycemicindex.R
 import com.kursatercan.glycemicindex.Repostory
 import com.kursatercan.glycemicindex.databinding.ActivityRefreshDbBinding
+import com.kursatercan.glycemicindex.util.ListenerRef
 
 class RefreshDbActivity : AppCompatActivity() {
     private lateinit var bind : ActivityRefreshDbBinding
@@ -24,15 +25,10 @@ class RefreshDbActivity : AppCompatActivity() {
         }
 
         bind.btnUpdate.setOnClickListener {
-
-            bind.tvInfoText.text = getString(R.string.on_data_fetching_info)
-
             Repostory().updateDataFromSource(this)
-
-            bind.tvInfoText.text = getString(R.string.update_info)
+            ListenerRef.categoriesFragmentRef?.onDbRefresh()
             Toast.makeText(this, "Veritabanı güncellendi!", Toast.LENGTH_SHORT).show()
         }
-
 
     }
 

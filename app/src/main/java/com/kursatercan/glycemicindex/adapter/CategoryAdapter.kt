@@ -75,7 +75,8 @@ class CategoryAdapter(val context: Context, private val categoryList:ArrayList<C
 
     override fun onRemoveCategory(position: Int) {
         categoryList.removeAt(position)
-        notifyItemChanged(position)
+        //notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 
 }

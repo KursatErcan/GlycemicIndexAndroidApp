@@ -12,7 +12,6 @@
         android:layout_margin="12dp"
         android:visibility="visible" />
 
-    <!-- TODO : güzel bi görselle değiştirilebilir -->
     <TextView
         android:id="@+id/tv_favouriteInfo"
         android:layout_width="wrap_content"

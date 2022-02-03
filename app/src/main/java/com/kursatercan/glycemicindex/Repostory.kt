@@ -1,7 +1,6 @@
 package com.kursatercan.glycemicindex
 
 import android.content.Context
-import android.util.Log
 import com.kursatercan.glycemicindex.db.DBManager
 import com.kursatercan.glycemicindex.model.Category
 import com.kursatercan.glycemicindex.model.Food
@@ -10,12 +9,10 @@ import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
 class Repostory {
-    //private lateinit var db: DBManager
     private val url: String =
         "http://kolaydoktor.com/saglik-icin-yasam/diyet-ve-beslenme/besinlerin-glisemik-indeks-tablosu/0503/1"
 
     fun getDataFromSource(context: Context) {
-        //db = DBManager(context)
 
         val thread = Thread {
             try {
@@ -28,23 +25,24 @@ class Repostory {
                     val rows: Elements = it.select("tbody").select("tr")
                     var cid = ""
                     for ((index, row) in rows.withIndex()) {
-                        if (index == 0) {
+                        if (index == 0) { // category title
                             val title = row.select("p").text()
                             if (title.trim().isEmpty()) continue
 
-                            Log.d("Category : ", title)
+                            //Log.d("Category : ", title)
 
                             val category = Category()
                             category.title = title
                             DBManager(context).addCategory(category)
-                            Log.d("burdasın : ", "getDataFromSource: ")
                             cid = category.cid
                         } else if (index == 1) {
-                            Log.d(
+                            //column titles
+
+                            /*Log.d(
                                 "Colum Names : (${row.select("p").size}) -- ",
                                 row.select("p").text()
-                            )
-                        } else {
+                            )*/
+                        } else { // foods in category
                             val elements: Elements = row.select("p")
                             val food = Food()
                             food.cid = cid
@@ -56,23 +54,20 @@ class Repostory {
                             DBManager(context).addFood(food)
 
                             //Log.d("Item : (${row.select("p").size})  -- ", row.select("p").text())
-                            Log.d("Item : (${row.select("p").size})  -- ", food.name+" "+food.glysemicIndex + " " + food.carbohydrateAmount + " "+ food.calorie)
+                            //Log.d("Item : (${row.select("p").size})  -- ", food.name+" "+food.glysemicIndex + " " + food.carbohydrateAmount + " "+ food.calorie)
 
                         }
-
                     }
                 }
             } catch (ex: Exception) {
-                Log.d("HTML PARSER : ", ex.toString())
-
+                //Log.d("HTML PARSER : ", ex.toString())
             }
         }
         thread.start()
     }
 
     fun updateDataFromSource(context: Context) {
-        Log.d("updateDataFromSource", "updateDataFromSource: burdasın")
-        //db = DBManager(context)
+
         val thread = Thread {
             try {
                 val doc: Document = Jsoup.connect(url).get()
@@ -83,12 +78,12 @@ class Repostory {
                     val rows: Elements = it.select("tbody").select("tr")
                     var cid = ""
                     for ((index, row) in rows.withIndex()) {
-                        if (index == 0) {
+                        if (index == 0) { // category
                             val title = row.select("p").text()
 
                             if (title.trim().isEmpty() ||  DBManager(context).getCategory(title) == 1) {
                                 cid = DBManager(context).getCategoryObj(title).cid
-                                Log.d("Added New Category : ", title)
+                                //Log.d("Added New Category : ", title)
                                 continue
                             }else{
                                 val category = Category()
@@ -97,12 +92,12 @@ class Repostory {
                                 cid = category.cid
                             }
 
-                        } else if (index == 1) {
-                            Log.d(
+                        } else if (index == 1) { // column titles
+                            /*Log.d(
                                 "Colum Names : (${row.select("p").size}) -- ",
                                 row.select("p").text()
-                            )
-                        } else {
+                            )*/
+                        } else { // foods in category
                             val elements: Elements = row.select("p")
                             val food = Food()
 
@@ -117,17 +112,12 @@ class Repostory {
                             }else{
                                 DBManager(context).addFood(food)
                             }
-
-
-                            Log.d("Item : (${row.select("p").size})  -- ", row.select("p").text())
-
+                            //Log.d("Item : (${row.select("p").size})  -- ", row.select("p").text())
                         }
-
                     }
                 }
             } catch (ex: Exception) {
-                Log.d("HTML PARSER : ", ex.toString())
-
+                //Log.d("HTML PARSER : ", ex.toString())
             }
         }
         thread.start()

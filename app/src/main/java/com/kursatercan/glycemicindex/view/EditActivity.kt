@@ -2,18 +2,18 @@ package com.kursatercan.glycemicindex.view
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.kursatercan.glycemicindex.R
-import com.kursatercan.glycemicindex.RealmDBActionListenerReferences
 import com.kursatercan.glycemicindex.adapter.CategorySpinnerAdapter
 import com.kursatercan.glycemicindex.databinding.ActivityEditBinding
 import com.kursatercan.glycemicindex.db.DBManager
 import com.kursatercan.glycemicindex.model.Category
 import com.kursatercan.glycemicindex.model.Food
+import com.kursatercan.glycemicindex.util.ListenerRef
 
 class EditActivity : AppCompatActivity() {
     private lateinit var bind : ActivityEditBinding
@@ -33,7 +33,6 @@ class EditActivity : AppCompatActivity() {
         db = DBManager(this)
         categoryList = db.getCategories()
 
-
         categorySpinnerAdapter = CategorySpinnerAdapter(categoryList,this)
         bind.spinnerCategory.adapter = categorySpinnerAdapter
 
@@ -47,12 +46,12 @@ class EditActivity : AppCompatActivity() {
         categoryList.add(category)
         categorySpinnerAdapter.notifyDataSetChanged()
         Toast.makeText(this, "Yeni kategori oluşturuldu.", Toast.LENGTH_SHORT).show()
-        RealmDBActionListenerReferences.categoryFragmentListener?.onAddedCategory(category)
+
+        ListenerRef.categoriesFragmentRef?.onNewCategoryAdded(category)
 
     }
 
     private fun createFood(){
-        // TODO recyclerı güncelle
         val selectedCategory = bind.spinnerCategory.selectedItem as Category
         val food = Food()
         food.cid = selectedCategory.cid
@@ -69,20 +68,13 @@ class EditActivity : AppCompatActivity() {
         bind.etCalorie.setText("")
         Toast.makeText(this, "Yeni besin eklendi.", Toast.LENGTH_SHORT).show()
 
-        RealmDBActionListenerReferences.foodAdapterListener?.onAddedFood(food)
-
+        ListenerRef.categoriesFragmentRef?.onNewFoodAdded()
     }
 
-
     fun onCategorySaveButtonClicked(view: View){
-
         val title = bind.etCategoryTitle.text.toString().trim()
         if(title.isEmpty()) bind.etCategoryTitle.error = getString(R.string.empty_tv_error_message)
-        else{
-           saveCategoryDialog().show()
-        }
-
-
+        else{ saveCategoryDialog().show() }
     }
 
     fun onFoodSaveButtonClicked(view: View){
@@ -134,6 +126,4 @@ class EditActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }

@@ -29,22 +29,11 @@ class SplashActivity : AppCompatActivity() {
             pref.edit().putBoolean(firstOpen, true).apply()
         }
 
-        Handler().postDelayed(Runnable {
+        Handler().postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-
         }, 3000)
 
-        /*
-        Timer().schedule(object : TimerTask() {
-            override fun run() {
-                val intent = Intent(this@SplashActivity,MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }, 1500)
-
-         */
     }
 }
