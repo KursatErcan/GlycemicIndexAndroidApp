@@ -21,7 +21,7 @@ import com.kursatercan.glycemicindex.view.MainActivity
 import com.kursatercan.glycemicindex.view.fragment.ModifyFoodDialogFragment
 
 
-class FoodAdapter(val context: Context, private var foodList:ArrayList<Food>) : RecyclerView.Adapter<FoodAdapter.ViewHolder>(),
+class FoodAdapter(val context: Context, private var foodList:ArrayList<Food>, private var parentAdapter : CategoryAdapter? = null) : RecyclerView.Adapter<FoodAdapter.ViewHolder>(),
     RealmDBActionListener,ModifyFoodDialogActions {
     private lateinit var mContext: Context
     private lateinit var cid : String
@@ -133,9 +133,15 @@ class FoodAdapter(val context: Context, private var foodList:ArrayList<Food>) : 
         notifyItemRemoved(position)
     }
 
+    override fun onMovedFood() {
+        parentAdapter?.notifyDataSetChanged()
+    }
+
 }
 
 interface ModifyFoodDialogActions{
     fun onUpdateFood(food: Food,position: Int)
+    //fun onUpdateFoodWithCategory()
     fun onRemoveFood(position: Int)
+    fun onMovedFood()
 }

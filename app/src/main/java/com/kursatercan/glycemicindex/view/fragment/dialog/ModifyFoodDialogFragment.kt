@@ -45,11 +45,11 @@ class ModifyFoodDialogFragment : DialogFragment() {
         val food: Food = db.getFood(fid!!)
         val categoryList = db.getCategories()
         val categorySpinnerAdapter = CategorySpinnerAdapter(categoryList, mContext)
-
+        val firstCID = food.cid
 
         bind?.apply {
             spinnerCategory.adapter = categorySpinnerAdapter
-            spinnerCategory.setSelection(categoryFind(food.cid, categoryList))
+            spinnerCategory.setSelection(categoryFind(firstCID, categoryList))
             etFoodName.setText(food.name)
             etGlysemicIndex.setText(food.glysemicIndex.toString())
             etCarbohydrateAmount.setText(food.carbohydrateAmount)
@@ -76,7 +76,12 @@ class ModifyFoodDialogFragment : DialogFragment() {
                         food.carbohydrateAmount = etCarbohydrateAmount.text.toString()
                         food.calorie = etCalorie.text.toString()
                     }
-                    ListenerRef.modifyFoodDialogListener!!.onUpdateFood(food,position!!)
+                    if(food.cid == firstCID)
+                        ListenerRef.modifyFoodDialogListener!!.onUpdateFood(food,position!!)
+                    else{
+                        context
+                        ListenerRef.modifyFoodDialogListener!!.onMovedFood()
+                    }
                     Toast.makeText(mContext, "Değişiklikler kaydedildi.", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -111,7 +116,7 @@ class ModifyFoodDialogFragment : DialogFragment() {
         return 0
     }
 
-
+//ListenerRef.modifyCategoryDialogListener?.onUpdateCategory(category,position!!)
 
 }
 
