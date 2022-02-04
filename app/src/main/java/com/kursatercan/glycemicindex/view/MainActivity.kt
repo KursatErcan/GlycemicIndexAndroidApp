@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_main))
+        supportActionBar?.title = "Kategoriler"
 
         val categoriesFragment = CategoriesFragment()
         val searchFragment = SearchFragment()
@@ -29,9 +30,20 @@ class MainActivity : AppCompatActivity() {
 
         bind.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.categoriesFragment -> changeFragment(categoriesFragment)
-                R.id.searchFragment -> changeFragment(searchFragment)
-                R.id.favouritesFragment -> changeFragment(favouritesFragment)
+                R.id.categoriesFragment -> {
+                    changeFragment(categoriesFragment)
+                    supportActionBar?.title = "Kategoriler"
+                }
+                R.id.searchFragment -> {
+                    changeFragment(searchFragment)
+                    supportActionBar?.title = "Besin Arama"
+
+                }
+                R.id.favouritesFragment -> {
+                    changeFragment(favouritesFragment)
+                    supportActionBar?.title = "Favoriler"
+
+                }
             }
             true
         }
