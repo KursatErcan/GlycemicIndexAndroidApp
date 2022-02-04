@@ -43,6 +43,9 @@ Glisemik indeks değerlerini listeleyen Android uygulaması.
 <a href="https://github.com/KursatErcan/GlycemicIndexAndroidApp/blob/master/screenshots/6.jpg" target="_blank">
 <img src="https://github.com/KursatErcan/GlycemicIndexAndroidApp/blob/master/screenshots/6.jpg" width="200" style="max-width:100%;"></a>
   
+<a href="https://github.com/KursatErcan/GlycemicIndexAndroidApp/blob/master/screenshots/9.jpg" target="_blank">
+<img src="https://github.com/KursatErcan/GlycemicIndexAndroidApp/blob/master/screenshots/9.jpg" width="200" style="max-width:100%;"></a>
+  
 <a href="https://github.com/KursatErcan/GlycemicIndexAndroidApp/blob/master/screenshots/7.jpg" target="_blank">
 <img src="https://github.com/KursatErcan/GlycemicIndexAndroidApp/blob/master/screenshots/7.jpg" width="200" style="max-width:100%;"></a>
   
